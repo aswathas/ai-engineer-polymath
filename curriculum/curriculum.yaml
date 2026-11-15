@@ -1,0 +1,99 @@
+series: polymath
+version: 1
+modules:
+  - id: P0
+    slug: engineering-spine
+    dir: P0-engineering-spine
+    title: Engineering Spine
+    hours: 40
+    prereqs: []
+    gate: G0
+  - id: P1
+    slug: math-for-ml
+    dir: P1-math-for-ml
+    title: Math for ML
+    hours: 45
+    prereqs:
+      - P0
+    gate: G1
+  - id: P2
+    slug: data-and-features
+    dir: P2-data-and-features
+    title: Data and Features
+    hours: 40
+    prereqs:
+      - P1
+    gate: G2
+  - id: P3
+    slug: classical-ml
+    dir: P3-classical-ml
+    title: Classical ML
+    hours: 45
+    prereqs:
+      - P2
+    gate: G3
+  - id: P4
+    slug: deep-learning
+    dir: P4-deep-learning
+    title: Deep Learning
+    hours: 50
+    prereqs:
+      - P3
+    gate: G4
+  - id: P5
+    slug: llm-mechanics
+    dir: P5-llm-mechanics
+    title: LLM Mechanics
+    hours: 45
+    prereqs:
+      - P4
+    gate: G5
+  - id: P6
+    slug: llm-application-engineering
+    dir: P6-llm-application-engineering
+    title: LLM Application Engineering
+    hours: 50
+    prereqs:
+      - P5
+    gate: G6
+  - id: P7
+    slug: evaluation
+    dir: P7-evaluation
+    title: Evaluation
+    hours: 45
+    prereqs:
+      - P6
+    gate: G7
+  - id: P8
+    slug: production-and-cost
+    dir: P8-production-and-cost
+    title: Production and Cost
+    hours: 40
+    prereqs:
+      - P7
+    gate: G8
+  - id: P9
+    slug: product-and-delivery
+    dir: P9-product-and-delivery
+    title: Product and Delivery
+    hours: 35
+    prereqs:
+      - P8
+    gate: G9
+  - id: CAPSTONE
+    slug: capstone
+    dir: capstone
+    title: Polymath Capstone
+    hours: 60
+    prereqs:
+      - P0
+      - P1
+      - P2
+      - P3
+      - P4
+      - P5
+      - P6
+      - P7
+      - P8
+      - P9
+    gate: GCAP
