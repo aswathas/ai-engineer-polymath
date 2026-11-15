@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-engineer-polymath"
+version = "0.1.0"
+description = "The AI Engineer Polymath curriculum: ten modules, a capstone, an agent pack, a skill pack, and the validators that keep all of it honest."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "aswathas" }]
+keywords = ["ai-engineering", "curriculum", "llm", "evals", "agents"]
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/aswathas/ai-engineer-polymath"
+
+[tool.setuptools]
+packages = ["tools", "tools.validators"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["error"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
