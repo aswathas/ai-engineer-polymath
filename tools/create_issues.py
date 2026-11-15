@@ -24,9 +24,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from tools.validators.common import read_text  # noqa: E402
-
 import yaml  # noqa: E402
+
+from tools.validators.common import read_text  # noqa: E402
 
 CRITERION_RE = re.compile(r"^\s*[-*]\s*(?:\[[ xX]?\]\s*)?(?P<text>.+?)\s*$")
 
@@ -96,7 +96,9 @@ def gh(args: list[str]) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     """Parse the arguments and create the issues. Returns the exit code."""
-    parser = argparse.ArgumentParser(description="Create the curriculum issues from the module notes.")
+    parser = argparse.ArgumentParser(
+        description="Create the curriculum issues from the module notes."
+    )
     parser.add_argument("--repo", default="aswathas/ai-engineer-polymath", help="target repository")
     parser.add_argument("--dry-run", action="store_true", help="print the plan instead of creating")
     args = parser.parse_args(argv)
@@ -112,12 +114,29 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     if args.dry_run:
-        print(json.dumps([{"title": t["title_line"], "body": issue_body(t)} for t in tasks], indent=2))
+        print(
+            json.dumps(
+                [{"title": t["title_line"], "body": issue_body(t)} for t in tasks], indent=2
+            )
+        )
         print(f"{len(tasks)} issue(s) planned", file=sys.stderr)
         return 0
 
     existing = json.loads(
-        gh(["issue", "list", "--repo", args.repo, "--state", "all", "--limit", "200", "--json", "number,title"])
+        gh(
+            [
+                "issue",
+                "list",
+                "--repo",
+                args.repo,
+                "--state",
+                "all",
+                "--limit",
+                "200",
+                "--json",
+                "number,title",
+            ]
+        )
     )
     by_title = {issue["title"]: issue["number"] for issue in existing}
 

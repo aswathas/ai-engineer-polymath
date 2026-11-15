@@ -18,7 +18,10 @@ def codes(issues) -> list[str]:
 
 
 def build_repo(root: Path) -> Path:
-    write(root / "docs" / "reviews" / "decision-log.md", "## D1 - Thing\n\n**Date:** 2026-01-01\n\nPrompt.\n")
+    write(
+        root / "docs" / "reviews" / "decision-log.md",
+        "## D1 - Thing\n\n**Date:** 2026-01-01\n\nPrompt.\n",
+    )
     write(root / "docs" / "reviews" / "prompts.md", "# Prompts\n\n## A prompt\n\n> hello\n")
     write(root / "docs" / "reviews" / "change-inventory.md", "| File | What | Why | How |\n")
     write(root / "BUILDLOG.md", "# Build Log\n")

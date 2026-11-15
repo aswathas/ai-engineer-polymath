@@ -15,7 +15,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from tools.validators.common import Issue, read_text, relpath
+from tools.validators.common import Issue, read_text
 
 RECORD_FILES = (
     "docs/reviews/decision-log.md",
@@ -74,7 +74,11 @@ def _check_inventory_rows(repo_root: Path, inventory: str) -> list[Issue]:
     for path, cells in _inventory_rows(inventory):
         if not (repo_root / path).exists():
             issues.append(
-                Issue("REC002", "docs/reviews/change-inventory.md", f"row names a missing file: {path}")
+                Issue(
+                    "REC002",
+                    "docs/reviews/change-inventory.md",
+                    f"row names a missing file: {path}",
+                )
             )
         if len(cells) < 4 or any(not cell for cell in cells[1:]):
             issues.append(
@@ -128,7 +132,11 @@ def _check_decision_entries(log: str) -> list[Issue]:
         title = match.group("title").strip()
         if "Prompt that produced it" not in body:
             issues.append(
-                Issue("REC005", "docs/reviews/decision-log.md", f"entry '{title}' records no prompt")
+                Issue(
+                    "REC005",
+                    "docs/reviews/decision-log.md",
+                    f"entry '{title}' records no prompt",
+                )
             )
         if "**Date:**" not in body:
             issues.append(

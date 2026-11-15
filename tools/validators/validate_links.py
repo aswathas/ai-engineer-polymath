@@ -36,7 +36,11 @@ def validate(repo_root: Path) -> list[Issue]:
                 # A pure anchor link points inside this document.
                 if fragment and fragment not in _anchors(text):
                     issues.append(
-                        Issue("LNK003", relpath(path, root), f"anchor #{fragment} not found in this file")
+                        Issue(
+                            "LNK003",
+                            relpath(path, root),
+                            f"anchor #{fragment} not found in this file",
+                        )
                     )
                 continue
 
@@ -50,7 +54,11 @@ def validate(repo_root: Path) -> list[Issue]:
             if resolved.is_dir():
                 if not any((resolved / name).is_file() for name in INDEX_NAMES):
                     issues.append(
-                        Issue("LNK004", relpath(path, root), f"directory link has no index: {target}")
+                        Issue(
+                            "LNK004",
+                            relpath(path, root),
+                            f"directory link has no index: {target}",
+                        )
                     )
                 continue
 

@@ -46,7 +46,9 @@ def run_all(repo_root: Path) -> list[Result]:
             issues = list(module.validate(repo_root))
         except Exception:  # noqa: BLE001 - a crashing validator must not hide the others
             detail = traceback.format_exc(limit=3).strip().splitlines()[-1]
-            issues = [Issue("VAL000", f"tools/validators/{name}.py", f"validator crashed: {detail}")]
+            issues = [
+                Issue("VAL000", f"tools/validators/{name}.py", f"validator crashed: {detail}")
+            ]
         results.append(Result(name=name, issues=issues))
     return results
 
@@ -55,7 +57,9 @@ def main(argv: list[str] | None = None) -> int:
     """Parse the arguments, run the validators and report. Returns the exit code."""
     parser = argparse.ArgumentParser(description="Run the polymath repository validators.")
     parser.add_argument("--repo", default=str(REPO_ROOT), help="repository root to validate")
-    parser.add_argument("--json", action="store_true", help="print a JSON report instead of a table")
+    parser.add_argument(
+        "--json", action="store_true", help="print a JSON report instead of a table"
+    )
     args = parser.parse_args(argv)
 
     repo_root = Path(args.repo).resolve()

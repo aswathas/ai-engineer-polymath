@@ -64,7 +64,9 @@ def test_missing_dev_dependencies_are_reported(fake_repo: Path) -> None:
 def test_missing_runtime_dependency_is_reported(fake_repo: Path) -> None:
     path = fake_repo / "pyproject.toml"
     path.write_text(
-        path.read_text(encoding="utf-8").replace('dependencies = ["PyYAML>=6.0"]', "dependencies = []"),
+        path.read_text(encoding="utf-8").replace(
+            'dependencies = ["PyYAML>=6.0"]', "dependencies = []"
+        ),
         encoding="utf-8",
     )
     issues = validate(fake_repo)

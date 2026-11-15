@@ -16,9 +16,8 @@ Codes:
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import tomllib
+from pathlib import Path
 
 from tools.validators.common import Issue, read_text
 
@@ -127,7 +126,11 @@ def _validate_gitignore(repo_root: Path) -> list[Issue]:
     }
     if ".env" not in lines:
         issues.append(Issue("SKEL008", ".gitignore", "does not exclude .env"))
-    missing = [pattern for pattern in ("__pycache__", ".venv", ".pytest_cache") if pattern not in lines]
+    missing = [
+        pattern
+        for pattern in ("__pycache__", ".venv", ".pytest_cache")
+        if pattern not in lines
+    ]
     if missing:
         issues.append(
             Issue(
