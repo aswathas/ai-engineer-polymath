@@ -26,3 +26,22 @@ record; this file keeps the decisive ones next to the code they produced.
 
 **Approval gate.** The user approves the canonical `plan.md` before any implementation task
 starts. The plan file is the contract for scope, file tree, validator codes and commit units.
+
+**Approval (second questionnaire).**
+
+> Approve canonical plan.md and start implementation?
+> - Approve - start T1 through T14, then push public
+> - Do not approve - I want changes first
+
+**Answer.** Approve - start T1 through T14, then push public.
+
+**Work prompts issued to the build agents.** Four build agents ran in parallel, each with a
+self-contained brief: one for the agent pack and its validator, one for the skill pack and its
+validator, one for the curriculum and its validator, one for the capstone briefs and their
+validator. Every brief stated the shared validator API, the exact error codes, the file ownership
+(one writer per file), the verification command, and the rule that no agent runs a git command.
+The brief texts are the substance of the four implementation commits
+`feat: add the agent pack and the agent validator`,
+`feat: add the skill pack and the skill validator`,
+`feat: add the P0-P9 curriculum, the capstone module and the curriculum validator` and
+`feat: add the capstone briefs, the capstone rubric and the project validator`.

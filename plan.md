@@ -223,3 +223,17 @@ Execution strategy: T1 serially by the main agent; T3–T8 dispatched to paralle
 ## 14. Approval gate
 
 This plan is the canonical `plan.md`. Nothing is implemented until the user approves it. On approval the agent proceeds T1 → T14, then reports the PR URL, commit list, CI state and the verification output.
+
+## 15. Implementation status (2026-11-15)
+
+Approved and implemented. The plan was executed with two deviations, both recorded in
+[docs/reviews/decision-log.md](docs/reviews/decision-log.md):
+
+1. **Commit order.** The runner and the self-hosting test (T9) landed after the documentation
+   and CI units (T10, T11), because the self-hosting test can only pass once the tree holds
+   every required directory. The content of each unit is unchanged.
+2. **Verification target.** Each commit was verified against its own committed tree (extracted
+   with `git archive`), not against the working tree. See decision D5.
+
+Final state: 7 validators, 0 issues; 95 pytest cases pass; `ruff check .` is clean; the issue
+generator plans 80 issues across the eleven modules. See [BUILDLOG.md](BUILDLOG.md).

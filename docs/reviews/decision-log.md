@@ -120,3 +120,58 @@ an `AGENTS.md` at the root that carries the rules every harness reads. No `.clau
 **Consequence.** The frontmatter shape is a contract: `name` and `description` and nothing
 else, checked by `AGT002` and `SKL002`. The fixed section order is checked too, so a skill
 reads the same way in every harness.
+
+---
+
+## D5 - Every commit is verified against its own tree
+
+**Date:** 2026-11-15
+
+**Decision.** Each commit is verified by extracting it with `git archive` into a temporary
+directory and running the validators and the test-suite **there**, not in the working tree.
+
+**Alternatives considered.**
+
+- *Verify the working tree.* Rejected: the working tree contains the files of later commits, so
+  a green run says nothing about the commit being made. The validators read the tree they ship
+  with, which is the whole point of a self-hosting repository.
+- *Verify only at the end of the branch.* Rejected: the end state would hide a broken
+  intermediate commit, and the commit discipline asks for one meaningful unit per commit.
+
+**Prompt that produced it.**
+
+> Approve canonical plan.md and start implementation?
+> - Approve - start T1 through T14, then push public
+
+**Answer.** Approve - start T1 through T14, then push public.
+
+**Consequence.** Every commit in the series carries a verification result for the tree that
+commit contains. The last commits in the series are the first ones where the whole contract set
+applies, because the earlier ones are partial builds: the skeleton validator requires directories
+that later tasks create.
+
+---
+
+## D6 - Validator codes are frozen; a new rule gets a new code
+
+**Date:** 2026-11-15
+
+**Decision.** Once a validator code is published in
+[docs/validator-reference.md](../validator-reference.md) and asserted on by a test, that code
+keeps its meaning forever. A new rule takes a new code in the same family range. A code is
+never renumbered and never reused for a different rule.
+
+**Alternatives considered.**
+
+- *Renumber codes when the rule set changes.* Rejected: a reader who bookmarked `AGT004` would
+  silently get a different meaning, and the tests would have to change with it.
+- *Use prose messages only.* Rejected: messages change with the wording; codes are what a test
+  asserts on and what CI output greps for.
+
+**Prompt that produced it.**
+
+> Every decision spoken with an AI (including the prompt that produced it) -> docs/reviews/decision-log.md
+
+**Consequence.** `SKEL001`-`SKEL010`, `AGT001`-`AGT008`, `SKL001`-`SKL009`, `CUR001`-`CUR009`,
+`PRJ001`-`PRJ007`, `LNK001`-`LNK004` and `REC001`-`REC006` are now part of the repository's
+public interface, the same way the agent and skill formats are.
