@@ -28,7 +28,7 @@ from tools.validators.common import read_text  # noqa: E402
 
 import yaml  # noqa: E402
 
-CRITERION_RE = re.compile(r"^\s*[-*]\s*\[[ xX]?\]\s*(?P<text>.+?)\s*$")
+CRITERION_RE = re.compile(r"^\s*[-*]\s*(?:\[[ xX]?\]\s*)?(?P<text>.+?)\s*$")
 
 
 def module_tasks(curriculum_yaml: Path) -> list[dict[str, object]]:
