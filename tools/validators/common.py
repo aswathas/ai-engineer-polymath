@@ -112,6 +112,22 @@ def relative_links(text: str) -> list[str]:
     return targets
 
 
+def markdown_links(text: str) -> list[tuple[str, str]]:
+    """Return ``(target, fragment)`` pairs for relative Markdown links.
+
+    A pure ``#anchor`` link yields an empty target and a non-empty fragment: it points
+    inside the document itself.
+    """
+    links: list[tuple[str, str]] = []
+    for match in LINK_RE.finditer(text):
+        raw = match.group("target").strip()
+        if raw.startswith(("http://", "https://", "mailto:", "tel:")):
+            continue
+        target, _, fragment = raw.partition("#")
+        links.append((target, fragment))
+    return links
+
+
 def relpath(path: Path, root: Path) -> str:
     """Return a repository-relative POSIX path, for stable messages."""
     try:
