@@ -5,6 +5,9 @@ exactly once.
 
 | File | What changed | Why | How verified |
 |------|--------------|-----|--------------|
+| `.github/dependabot.yml` | Added dependabot.yml. | The contracts have to be enforced on every push, not only on the author's machine. | The workflow parses as YAML and runs the same commands as the local verification. |
+| `.github/workflows/ci.yml` | Added ci.yml. | The contracts have to be enforced on every push, not only on the author's machine. | The workflow parses as YAML and runs the same commands as the local verification. |
+| `.github/workflows/docs-check.yml` | Added docs-check.yml. | The contracts have to be enforced on every push, not only on the author's machine. | The workflow parses as YAML and runs the same commands as the local verification. |
 | `.gitignore` | Added .gitignore. | Part of the change set for the polymath curriculum repository. | `python -m pytest -q` and `python tools/validators/run_all.py` both pass. |
 | `AGENTS.md` | Added AGENTS.md. | Part of the change set for the polymath curriculum repository. | `python -m pytest -q` and `python tools/validators/run_all.py` both pass. |
 | `BUILDLOG.md` | Added BUILDLOG.md. | Part of the change set for the polymath curriculum repository. | `python -m pytest -q` and `python tools/validators/run_all.py` both pass. |
